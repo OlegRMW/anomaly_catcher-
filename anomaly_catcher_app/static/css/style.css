@@ -1,0 +1,424 @@
+:root {
+  --greet-bg-color: #F8F9FA;
+  --button-color: #3498db;
+  --dark-grey-color:#2D3748;
+}
+
+
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-family: "Merriweather", serif;
+  background-color: var(--greet-bg-color);
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Main Styles
+/*-----------------------------------------------------------------------------------*/
+
+/*Greet-page start */
+
+.wrapper {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+.__container {
+  margin: 0 auto;
+  max-width: 1520px;
+}
+
+.greet-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--dark-grey-color);
+  min-height: 100vh; 
+  justify-content: center;
+}
+
+.greet-body__title {
+  font-size: calc(36px + 0.4vw);
+  text-align: center;
+}
+
+
+.greet-body__text {
+  padding: 20px 0px;
+  font-size: calc(14px + 0.3vw);
+  text-align: center;
+}
+
+.greet-body__button-block {
+  margin-top: 20px;
+  background-color: var(--button-color);
+  font-size: calc(14px + 0.3vw);
+  border-radius: 2px;  
+}
+
+.start-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: transparent;
+  color: var(--dark-grey-color);
+  border: 1px solid #000000;
+  border-radius: 0; 
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-size: calc(14px + 0.15vw);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 3px;
+}
+
+
+.start-button:hover {
+  color: #fff;
+}
+
+.greet-body:has(.start-button:hover) .greet-body__title {
+  color: var(--greet-bg-color);
+}
+
+.greet-body:has(.start-button:hover) .greet-body__text {
+  color: var(--greet-bg-color);
+}
+
+.start-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  transition: all 0.4s ease;
+  z-index: -1;
+}
+
+.start-button:hover::before {
+  left: 0;
+}
+
+/*Greet-page end */
+
+/* Home-page start */
+.flash-message-block {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  background-color: #3a86ff;
+  min-width: 100vw;
+  color: var(--dark-grey-color);
+  font-size: 1.2rem;
+}
+
+.flash-message-block__group {
+  display: flex;
+  gap: 1rem;
+}
+
+.flash-message-block__x-button {
+  cursor: pointer;
+}
+
+.home-body {
+  display: flex;  
+  justify-content: center;
+  min-height: 100vh;
+  color: var(--dark-grey-color);
+  background-color: var(--greet-bg-color);
+}
+
+.files-block {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  min-width: 30rem;
+  align-items: stretch;
+}
+
+.graphic-block {
+  flex-grow: 1;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
+.upload-form__title {
+  margin-bottom: 1rem;
+}
+
+.upload_form__item {
+  margin-bottom: 1.5rem;
+}
+
+.upload-form input[type="file"] {
+  width: 100%;
+  padding: 1rem;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  background: #f9fafb;
+  color: #4b5563;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  display: none;
+}
+
+.upload-form input[type="file"]:hover {
+  border-color: #3b82f6;
+  background: #f0f5ff;
+}
+
+.upload-form input[type="submit"] {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background: var(--button-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.upload-form input[type="submit"]:hover {
+  background: #2563eb;
+}
+
+.files-block__uploaded-files-list-container {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-radius: 13px;
+  padding: 2rem;
+  flex-grow: 1;
+}
+
+.files-block__title {
+  text-align: center;
+}
+
+.files-block__search_form {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.files-block__uploaded-files-list {
+  width: 100%;
+  padding: 20px;
+}
+
+.files-block__uploaded-files-list select {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  color: #4b5563;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  appearance: none; 
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+  cursor: pointer;
+}
+
+.files-block__uploaded-files-list select:hover {
+  border-color: #3b82f6;
+  background-color: #f0f5ff;
+}
+
+.files-block__uploaded-files-list select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+.files-block__uploaded-files-list option {
+  padding: 0.5rem;
+  background: white;
+  color: #1f2937;
+}
+
+.files-block__visualisations-list {
+  width: 100%;
+  padding: 20px;
+}
+
+.files-block__visualisations-list select {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  color: #4b5563;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  appearance: none; 
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+  cursor: pointer;
+}
+
+.files-block__visualisations-list select:hover {
+  border-color: #3b82f6;
+  background-color: #f0f5ff;  
+}
+
+.files-block__visualisation-select {
+  margin-top: 1rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="file"],
+textarea {
+  width: 100%;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  color: #4b5563;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+}
+
+.dynamicInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+input[type="submit"] {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background: var(--button-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background: #2563eb;
+}
+.dynamicInputs input[type="number"]:hover {
+  width: 100%;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  color: #4b5563;
+  font-size: 1rem;
+  transition: all 0.3s ease; 
+  border-color: #3b82f6;
+  background-color: #f0f5ff;  
+}
+/* Home-page end */ 
+
+/*-----------------------------------------------------------------------------------*/

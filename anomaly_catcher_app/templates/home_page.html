@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система замера колесных пар</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --font-main: 'Montserrat', sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #f5f7fa;
+            padding: 20px;
+        }
+
+        .wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        h4 {
+            margin: 20px 0 15px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+
+        label {
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        input, select, textarea {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: var(--font-main);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .text-danger {
+            color: var(--accent-color);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .row {
+            display: flex;
+            gap: 30px;
+        }
+
+        .col {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            align-self: flex-end;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .measurement-section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--secondary-color);
+            flex-grow: 1;
+        }
+
+
+
+        .validation-errors h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .validation-errors ul {
+            list-style-type: none;
+        }
+
+        .validation-errors li {
+            color: var(--accent-color);
+            padding: 5px 0;
+            border-bottom: 1px solid #f5c2c7;
+        }
+
+        .validation-errors li:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .row {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .wrapper {
+                padding: 20px;
+            }
+        }
+            /* Стили для сообщений */
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            position: relative;
+        }
+        
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        
+        .alert-warning {
+            color: #856404;
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+        }
+        
+        .alert-info {
+            color: #0c5460;
+            background-color: #d1ecf1;
+            border-color: #bee5eb;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: inherit;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+        
+        .close-btn:hover {
+            opacity: 0.7;
+        }
+        .submit-form {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Система замера параметров колесных пар</h1>
+        
+        <form method="POST" action="{{ url_for('add_measurement') }}">
+            {{ form.hidden_tag() }}
+            
+            <div class="form-group">
+                <label for="ep_num_wp">{{ form.ep_num_wp.label }}</label>
+                {{ form.ep_num_wp(id="ep_num_wp", class="form-control") }}
+                {% for error in form.ep_num_wp.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+                 <label for="user_change">{{ form.user_change.label }}</label>
+                {{ form.user_change(id="user_change", class="form-control") }}
+                {% for error in form.user_change.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+                 <label for="zamer_type">{{ form.zamer_type.label }}</label>
+                {{ form.zamer_type(id="zamer_type", class="form-control") }}
+                {% for error in form.zamer_type.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <div class="measurement-section">
+                        <h4>Левая сторона</h4>
+                        <div class="form-group">
+                            <label for="tu17l1">{{ form.tu17l1.label }}</label>
+                            {{ form.tu17l1(id="tu17l1") }}
+                            {% for error in form.tu17l1.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tu17l2">{{ form.tu17l2.label }}</label>
+                            {{ form.tu17l2(id="tu17l2") }}
+                            {% for error in form.tu17l2.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tu17l3">{{ form.tu17l3.label }}</label>
+                            {{ form.tu17l3(id="tu17l3") }}
+                            {% for error in form.tu17l3.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tu17l4">{{ form.tu17l4.label }}</label>
+                            {{ form.tu17l4(id="tu17l4") }}
+                            {% for error in form.tu17l4.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tu17l5">{{ form.tu17l5.label }}</label>
+                            {{ form.tu17l5(id="tu17l5") }}
+                            {% for error in form.tu17l5.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="measurement-section">
+                        <h4>Правая сторона</h4>
+                        <div class="form-group">
+                            <label for="tu17r1">{{ form.tu17r1.label }}</label>
+                            {{ form.tu17r1(id="tu17r1") }}
+                            {% for error in form.tu17r1.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tu17r2">{{ form.tu17r2.label }}</label>
+                            {{ form.tu17r2(id="tu17r2") }}
+                            {% for error in form.tu17r2.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tu17r3">{{ form.tu17r3.label }}</label>
+                            {{ form.tu17r3(id="tu17r3") }}
+                            {% for error in form.tu17r3.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tu17r4">{{ form.tu17r4.label }}</label>
+                            {{ form.tu17r4(id="tu17r4") }}
+                            {% for error in form.tu17r4.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tu17r5">{{ form.tu17r5.label }}</label>
+                            {{ form.tu17r5(id="tu17r5") }}
+                            {% for error in form.tu17r5.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="submit-form">
+                <a href="{{ url_for('wheels_page') }}">В архив замеров</a>
+                {{ form.submit(class="btn") }}
+            </div>   
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    <div class="validation-errors">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                <button type="button" class="close-btn" onclick="this.parentElement.style.display='none'">
+                                    &times;
+                                </button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </form>
+    </div>
+</body>
+</html>
