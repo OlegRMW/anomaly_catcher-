@@ -36,11 +36,11 @@ class WheelMeasurementForm(FlaskForm):
     ])
     
     tu17l2 = FloatField('Толщина гребня L2 (мм)', validators=[
-        NumberRange(min=10, max=33, message="Допустимый диапазон 20-35 мм"),
+        NumberRange(min=10, max=33, message="Допустимый диапазон 10-33 мм"),
         DataRequired(message="Укажите толщину гребня")
     ])
     tu17r2 = FloatField('Толщина гребня R2 (мм)', validators=[
-        NumberRange(min=10, max=33, message="Допустимый диапазон 20-35 мм"),
+        NumberRange(min=10, max=33, message="Допустимый диапазон 10-33 мм"),
         DataRequired(message="Укажите толщину гребня")
     ])
     
@@ -63,11 +63,11 @@ class WheelMeasurementForm(FlaskForm):
     ])
     
     tu17l5 = FloatField('Диаметр L5 (мм)', validators=[
-        NumberRange(min=900, max=1250, message="Допустимый диапазон 0-15 мм"),
+        NumberRange(min=900, max=1250, message="Допустимый диапазон 900-1250 мм"),
         DataRequired(message="Укажите диаметр бандажа")
     ])
     tu17r5 = FloatField('Диаметр R5 (мм)', validators=[
-        NumberRange(min=900, max=1250, message="Допустимый диапазон 0-15 мм"),
+        NumberRange(min=900, max=1250, message="Допустимый диапазон 900-1250 мм"),
         DataRequired(message="Укажите диаметр бандажа")
     ])
     
