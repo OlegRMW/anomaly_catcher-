@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Колесная пара ...</title>
+    <style>
+     :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --font-main: 'Montserrat', sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #f5f7fa;
+            padding: 20px;
+        }
+
+        .wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            display: flex;
+            align-items: center;
+        }
+
+        .info-block {
+            width: 100%;
+        }
+
+        label {
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        input, select, textarea {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: var(--font-main);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .text-danger {
+            color: var(--accent-color);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .col {
+            flex: 1;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--secondary-color);
+            flex-grow: 1;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        h3 {
+            margin: 20px 0 15px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        .measurement-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+        .col {
+
+        }
+        .row__content-group {
+            display: flex;
+            width: 100%;
+            gap: 40px;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="wrapper_info-block info-block">
+            <div class="row">
+                <h2>Колесная пара № {{ ep_num_wp }}</h2>
+                <div class="row__content-group">
+                    <div class="col">
+                        <div class="measurement-section">
+                            <h3>Левая сторона</h3>
+                            <div class="measurement-group">
+                                <label for="tu17l1">Прокат L1 (мм)</label>  
+                                <input type="text" id="tu17l1" value="{{ df['loco_11.tu17l1'][0] }}" readonly>
+                            </div>      
+                        </div>
+                         <div class="measurement-section">
+                            <div class="measurement-group">
+                                <label for="tu17l2">Толщина гребня L2 (мм)</label>  
+                                <input type="text" id="tu17l2" value="{{ df['loco_11.tu17l2'][0] }}" readonly>
+                            </div>      
+                        </div>
+                         <div class="measurement-section">
+                            <div class="measurement-group">
+                                <label for="tu17l3">Крутизна гребня L3 (мм)</label>  
+                                <input type="text" id="tu17l3" value="{{ df['loco_11.tu17l3'][0] }}" readonly>
+                            </div>      
+                        </div>
+                         <div class="measurement-section">
+                            <div class="measurement-group">
+                                <label for="tu17l4">Толщина бандажа L4 (мм)</label>  
+                                <input type="text" id="tu17l4" value="{{ df['loco_11.tu17l4'][0] }}" readonly>
+                            </div>      
+                        </div>
+                         <div class="measurement-section">
+                            <div class="measurement-group">
+                                <label for="tu17l5">Диаметр L5 (мм)</label>  
+                                <input type="text" id="tu17l5" value="{{ df['loco_11.tu17l5'][0] }}" readonly>
+                            </div>       
+                        </div>
+                    </div>
+                    
+                    <div class="col">
+                        <div class="measurement-section">
+                            <h3>Правая сторона</h3>
+                            <div class="measurement-group">
+                                <label for="tu17r1">Прокат R1 (мм)</label>
+                                <input type="text" id="tu17r1" value="{{ df['loco_11.tu17r1'][0] }}" readonly>
+                            </div>
+                        </div>
+                        <div class="measurement-section">
+                            <div class="measurement-group">
+                                <label for="tu17r2">Толщина гребня R2 (мм)</label>
+                                <input type="text" id="tu17r2" value="{{ df['loco_11.tu17r2'][0] }}" readonly>
+                            </div>
+                        </div>
+                        <div class="measurement-section">
+                            <div class="measurement-group">
+                                <label for="tu17r3">Крутизна гребня R3 (мм)</label>
+                                <input type="text" id="tu17r3" value="{{ df['loco_11.tu17r3'][0] }}" readonly>
+                            </div>
+                        </div>
+                        <div class="measurement-section">
+                            <div class="measurement-group">
+                                <label for="tu17r4">Толщина бандажа R4 (мм)</label>
+                                <input type="text" id="tu17r4" value="{{ df['loco_11.tu17r4'][0] }}" readonly>
+                            </div>
+                        </div>
+                        <div class="measurement-section">
+                            <div class="measurement-group">
+                                <label for="tu17r5">Диаметр R5 (мм)</label>
+                                <input type="text" id="tu17r5" value="{{ df['loco_11.tu17r5'][0] }}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ url_for('wheels_page') }}">В архив замеров</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

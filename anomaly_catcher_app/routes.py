@@ -225,10 +225,23 @@ def wheels_page():
     filter_form.wear_category.data = request.args.get('wear_category', '')
     
     return render_template(
-        'wheels.html',
+        'wheels_page.html',
         df=paginated_df.to_dict(orient='index'),
         form=filter_form,
         current_page=page,
         total_pages=total_pages
     )
     
+@app.route('/sample')
+def sample_view_page():
+    ep_num_wp = request.args.get('ep_num_wp')
+    
+    csv_path = Path('anomaly_catcher_app/wheels.csv')
+    
+    try:
+        wheels_data = pd.read_csv(csv_path)       
+        df = wheels_data[wheels_data['ep_num_wp'] == int(ep_num_wp)]
+    except Exception as e:
+        print(e)
+    
+    return render_template('sample_view_page.html', ep_num_wp=ep_num_wp, df=df)

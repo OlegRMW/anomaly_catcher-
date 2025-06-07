@@ -149,6 +149,7 @@
         .btn-view {
             background-color: var(--secondary-color);
             color: white;
+            text-decoration: none;
         }
 
         .btn-view:hover {
@@ -158,6 +159,7 @@
         .btn-delete {
             background-color: var(--accent-color);
             color: white;
+            text-decoration: none;
         }
 
         .btn-delete:hover {
@@ -285,8 +287,8 @@
                                 {% endif %}
                             {% endfor %}
                             <td class="actions">
-                                <button class="btn btn-view">Просмотр</button>
-                                <button class="btn btn-delete">Удалить</button>
+                                <a class="btn btn-view" href="{{ url_for('sample_view_page', ep_num_wp=df[row]['ep_num_wp']) }}">Просмотр</a>
+                                <a class="btn btn-delete" href="#">Удалить</a>
                             </td>
                         </tr>
                     {% endfor %}  
